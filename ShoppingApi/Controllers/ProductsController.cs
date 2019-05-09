@@ -17,6 +17,7 @@ namespace ShoppingApi.Controllers
             new Product {Id = 1, Name = "Green Matter Keyboard", Category = "Electronics", Price = 60},
             new Product {Id = 2, Name = "Red Monster Cereal", Category = "Food", Price = 9.99M},
             new Product {Id = 3, Name = "Plastic Box", Category = "House", Price = 12.99M},
+            new Product {Id = 4, Name = "Weird Mouse", Category = "Electronics", Price = 12.99M},
         };
 
         [HttpGet]
@@ -36,7 +37,7 @@ namespace ShoppingApi.Controllers
         [HttpGet("searchCategory/{category}")]
         public ActionResult<IEnumerable<Product>> GetByCategory(string category)
         {
-            var productsFound = products.Where((p) => p.Category == category);
+            var productsFound = products.Where((p) => p.Category.ToLower() == category.ToLower());
             if (productsFound == null) return NotFound();
             return  Ok(productsFound);
         }
