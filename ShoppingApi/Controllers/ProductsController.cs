@@ -32,5 +32,13 @@ namespace ShoppingApi.Controllers
             if (product == null) return NotFound();
             return Ok(product);
         }
+
+        [HttpGet("searchCategory/{category}")]
+        public ActionResult<IEnumerable<Product>> GetByCategory(string category)
+        {
+            var productsFound = products.Where((p) => p.Category == category);
+            if (productsFound == null) return NotFound();
+            return  Ok(productsFound);
+        }
     }
 }
